@@ -6,13 +6,18 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+
+
+  
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        "escapade": "#ff385c",
+        "escapade-dark": "#d50027",
       },
     },
   },
+
+
   plugins: [],
 } satisfies Config;
