@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
-import Model from "./components/models/model";
+
+import LoginModel from "./components/models/LoginModal";
+import SignupModel from "./components/models/SignupModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,8 +34,8 @@ export default function RootLayout({
       >
         <Navbar></Navbar>
         <div className="pt-40"> {children}</div>
-
-        <Model label="Model Test" content={content} isOpen={false} />
+        <LoginModel />
+        <SignupModel />
       </body>
     </html>
   );

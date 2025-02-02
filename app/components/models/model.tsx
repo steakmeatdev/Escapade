@@ -1,10 +1,11 @@
 "use client";
+
 import { useCallback, useState, useEffect } from "react";
 interface ModelProps {
   label: string;
   content: React.ReactElement;
   isOpen: Boolean;
-  close: () => {};
+  close: () => void;
 }
 
 const Model: React.FC<ModelProps> = ({ label, content, isOpen, close }) => {
@@ -36,7 +37,10 @@ const Model: React.FC<ModelProps> = ({ label, content, isOpen, close }) => {
         >
           <div className="w-full h-auto rounded-xl relative flex flex-col bg-white">
             <header className="h-[60px] flex items-center p-6 rounded-t justify-center relative border-b">
-              <div className=" p-3 absolute left-3 hover:bg-gray-300 rounded-full cursor-pointer">
+              <div
+                onClick={handleClose}
+                className=" p-3 absolute left-3 hover:bg-gray-300 rounded-full cursor-pointer"
+              >
                 <svg
                   fill="none"
                   viewBox="0 0 24 24"

@@ -1,9 +1,13 @@
 "use client";
-
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useSignupModal from "@/app/hooks/useSignupModal";
 import { useState } from "react";
 import MenuLink from "./MenuLink";
+
 const UserNav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const loginModel = useLoginModal();
+  const signupModel = useSignupModal();
 
   return (
     <div className="p-2 relative inline-block rounded-full">
@@ -46,13 +50,15 @@ const UserNav = () => {
         <div className=" w-[220px] absolute top-[60px] bg-white border right-0 rounded-xl shadow-md flex flex-col ">
           <MenuLink
             onClick={() => {
-              console.log("clicked");
+              console.log("Login clicked");
+              loginModel.open();
             }}
             label="Log In"
           />
           <MenuLink
             onClick={() => {
-              console.log("clicked");
+              signupModel.open();
+              console.log("Signup clicked");
             }}
             label="Sign Up"
           />
