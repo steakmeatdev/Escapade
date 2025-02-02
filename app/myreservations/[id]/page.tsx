@@ -36,7 +36,7 @@ const MyReservationsPage = () => {
                 </p>
               </div>
             </div>
-            <div className="py-4 px-6 bg-escapade cursor-pointer mt-4 hover:bg-escapade-dark rounded-xl text-white w-fit">
+            <div className="py-4 px-6 bg-escapade cursor-pointer  hover:bg-escapade-dark rounded-xl text-white w-fit">
               Go to property
             </div>
           </div>
@@ -74,7 +74,7 @@ const MyReservationsPage = () => {
                 </p>
               </div>
             </div>
-            <div className="py-4 px-6 bg-escapade cursor-pointer mt-4 hover:bg-escapade-dark rounded-xl text-white w-fit">
+            <div className="py-4 px-6 bg-escapade cursor-pointer hover:bg-escapade-dark rounded-xl text-white w-fit">
               Go to property
             </div>
           </div>
