@@ -1,7 +1,18 @@
+"use client";
+
+import { useState } from "react";
+import MenuLink from "./MenuLink";
 const UserNav = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="p-2 relative inline-block rounded-full">
-      <button className="flex items-center">
+      <button
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
+        className="flex items-center"
+      >
         <svg
           fill="none"
           viewBox="0 0 24 24"
@@ -30,6 +41,23 @@ const UserNav = () => {
           />
         </svg>
       </button>
+
+      {isOpen && (
+        <div className=" w-[220px] absolute top-[60px] bg-white border right-0 rounded-xl shadow-md flex flex-col ">
+          <MenuLink
+            onClick={() => {
+              console.log("clicked");
+            }}
+            label="Log In"
+          />
+          <MenuLink
+            onClick={() => {
+              console.log("clicked");
+            }}
+            label="Sign Up"
+          />
+        </div>
+      )}
     </div>
   );
 };

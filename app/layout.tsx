@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
+import Model from "./components/models/model";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,6 +24,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const content = <p>He</p>;
   return (
     <html lang="en">
       <body
@@ -30,6 +32,8 @@ export default function RootLayout({
       >
         <Navbar></Navbar>
         <div className="pt-40"> {children}</div>
+
+        <Model label="Model Test" content={content} isOpen={false} />
       </body>
     </html>
   );
