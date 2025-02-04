@@ -10,7 +10,7 @@ const UserNav = () => {
   const signupModel = useSignupModal();
 
   return (
-    <div className="p-2 relative inline-block rounded-full">
+    <div className="p-2 relative inline-block hover:bg-gray-100 rounded-full border border-gray-300">
       <button
         onClick={() => {
           setIsOpen(!isOpen);
