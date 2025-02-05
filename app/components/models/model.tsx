@@ -18,7 +18,6 @@ const Model: React.FC<ModelProps> = ({ label, content, isOpen, close }) => {
   const handleClose = useCallback(() => {
     setShowModel(false);
 
-    // For animation
     setTimeout(() => {
       close();
     }, 300);

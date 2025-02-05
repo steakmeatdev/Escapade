@@ -9,6 +9,7 @@ export async function handleLogin(
 ) {
   const cookieStore = await cookies();
 
+  // Setting the cookies in the browser's store
   cookieStore.set("session_userid", userId, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",

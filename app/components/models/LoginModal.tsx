@@ -11,10 +11,13 @@ const LoginModel = () => {
   const loginModel = useLoginModal();
   const router = useRouter();
 
+  // Fields
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
+
   const submitLogin = async () => {
+    // form data to submit
     const formData = {
       email: email,
       password: password,
@@ -24,8 +27,11 @@ const LoginModel = () => {
       JSON.stringify(formData)
     );
     if (response.access) {
+      // LoginView of the backend returned the user primary key, access token and the refresh token
       handleLogin(response.user.pk, response.access, response.refresh);
+      // Closing the login modal
       loginModel.close();
+      // Getting back to the home page
       router.push("/");
     } else {
       setErrors(response.non_field_errors);

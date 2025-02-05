@@ -34,7 +34,7 @@ const Categories = () => {
           src="https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg"
           alt="Category - Beach"
         />
-        <span className="text-sm">Tiny holes</span>
+        <span className="text-sm">Tiny homes</span>
       </div>
     </div>
   );

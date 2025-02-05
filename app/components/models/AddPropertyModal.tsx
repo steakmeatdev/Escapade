@@ -8,10 +8,12 @@ import useAddPropertyModal from "@/app/hooks/usePropertyModal";
 import SelectCountry, {
   SelectCountryValue,
 } from "@/app/components/forms/SelectCountry";
-
 import apiService from "@/app/services/apiService";
 import { useRouter } from "next/navigation";
+
 const AddPropertyModal = () => {
+  const router = useRouter();
+  // Specifying form states
   const [currentStep, setCurrentStep] = useState(1);
   const [errors, setErrors] = useState<string[]>([]);
   const [dataCategory, setDataCategory] = useState("");
@@ -26,22 +28,27 @@ const AddPropertyModal = () => {
   // dataImage has file type
   const [dataImage, setDataImage] = useState<File | null>(null);
 
+  // Including useAddPropertyModal
   const addPropertyModal = useAddPropertyModal();
-  const router = useRouter();
 
+  // Function to set category state
   const setCategory = (category: string) => {
     setDataCategory(category);
   };
+
+  // Function to set image state (file 0)
   const setImage = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       const tmpImage = event.target.files[0];
       setDataImage(tmpImage);
     }
   };
-  //
-  // SUbmit
+
+  // Function to submit the form and creating a property in the database
   const submitForm = async () => {
     console.log("submitForm");
+
+    // Checking if states are not empty
     if (
       dataCategory &&
       dataTitle &&
@@ -50,6 +57,7 @@ const AddPropertyModal = () => {
       dataCountry &&
       dataImage
     ) {
+      // Creating the form
       const formData = new FormData();
       formData.append("category", dataCategory);
       formData.append("title", dataTitle);
@@ -61,10 +69,13 @@ const AddPropertyModal = () => {
       formData.append("country", dataCountry.label);
       formData.append("country_code", dataCountry.value);
       formData.append("image", dataImage);
+
+      // Calling service API to submit the form
       const response = await apiService.post(
         "/api/properties/create/",
         formData
       );
+
       if (response.success) {
         console.log("SUCCESS :-D");
         router.push("/");

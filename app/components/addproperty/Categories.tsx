@@ -16,11 +16,10 @@ const Categories: React.FC<CategoriesProps> = ({
             dataCategory == "Beach" ? "border-gray-800" : "border-white"
           } opacity-60 hover:border-gray-200 hover:opacity-100`}
         >
-          <Image
-            src="/icn_category_beach.jpeg"
+          <img
+            className="w-6 h-6"
+            src="https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg"
             alt="Category - Beach"
-            width={20}
-            height={20}
           />
           <span className="text-xs">Beach</span>
         </div>
@@ -30,11 +29,10 @@ const Categories: React.FC<CategoriesProps> = ({
             dataCategory == "Villas" ? "border-gray-800" : "border-white"
           } opacity-60 hover:border-gray-200 hover:opacity-100`}
         >
-          <Image
-            src="/icn_category_beach.jpeg"
+          <img
+            className="w-6 h-6"
+            src="https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg"
             alt="Category - Beach"
-            width={20}
-            height={20}
           />
           <span className="text-xs">Villas</span>
         </div>
@@ -44,11 +42,10 @@ const Categories: React.FC<CategoriesProps> = ({
             dataCategory == "Cabins" ? "border-gray-800" : "border-white"
           } opacity-60 hover:border-gray-200 hover:opacity-100`}
         >
-          <Image
-            src="/icn_category_beach.jpeg"
+          <img
+            className="w-6 h-6"
+            src="https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg"
             alt="Category - Beach"
-            width={20}
-            height={20}
           />
           <span className="text-xs">Cabins</span>
         </div>
@@ -58,11 +55,10 @@ const Categories: React.FC<CategoriesProps> = ({
             dataCategory == "Tiny homes" ? "border-gray-800" : "border-white"
           } opacity-60 hover:border-gray-200 hover:opacity-100`}
         >
-          <Image
-            src="/icn_category_beach.jpeg"
+          <img
+            className="w-6 h-6"
+            src="https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg"
             alt="Category - Beach"
-            width={20}
-            height={20}
           />
           <span className="text-xs">Tiny homes</span>
         </div>

@@ -11,20 +11,21 @@ const AddProperty: React.FC<AddPropertyButtonProps> = ({ userId }) => {
   const loginModal = useLoginModal();
   const addPropertyModal = useAddPropertyModal();
 
-  const airbnbYourHome = () => {
-    if (userId) {
-      addPropertyModal.open();
-    } else {
-      loginModal.open();
-    }
+  const escapadeYourHome = () => {
+    addPropertyModal.open();
+    // if (userId) {
+    //   addPropertyModal.open();
+    // } else {
+    //   loginModal.open();
+    // }
   };
 
   return (
     <div
-      onClick={airbnbYourHome}
+      onClick={escapadeYourHome}
       className="p-2 cursor-pointer text-sm font-semibold rounded-full hover:bg-gray-200"
     >
-      Djangobnb your home
+      Escapade your home
     </div>
   );
 };

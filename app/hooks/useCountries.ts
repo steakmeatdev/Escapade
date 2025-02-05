@@ -1,3 +1,5 @@
+// Return all the countries with getAll() or a specific one using its value
+
 import countries from "world-countries";
 const formattedCountries = countries.map((country) => ({
   value: country.cca2,
