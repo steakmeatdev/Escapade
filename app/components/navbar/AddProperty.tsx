@@ -1,8 +1,32 @@
-const AddProperty = () => {
+"use client";
+
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useAddPropertyModal from "@/app/hooks/usePropertyModal";
+
+interface AddPropertyButtonProps {
+  userId?: string | null;
+}
+
+const AddProperty: React.FC<AddPropertyButtonProps> = ({ userId }) => {
+  const loginModal = useLoginModal();
+  const addPropertyModal = useAddPropertyModal();
+
+  const airbnbYourHome = () => {
+    if (userId) {
+      addPropertyModal.open();
+    } else {
+      loginModal.open();
+    }
+  };
+
   return (
-    <div className="p-2 cursor-pointer text-sm font-semibold rounded-full hover:bg-gray">
-      Escapade - your home
+    <div
+      onClick={airbnbYourHome}
+      className="p-2 cursor-pointer text-sm font-semibold rounded-full hover:bg-gray-200"
+    >
+      Djangobnb your home
     </div>
   );
 };
+
 export default AddProperty;

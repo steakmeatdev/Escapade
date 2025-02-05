@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import PropertyListItem from "./PropertyListItem";
 import apiService from "@/app/services/apiService";
 
+// Specifying properties types for Property
 export type PropertyType = {
   id: string;
   title: string;
@@ -11,18 +12,18 @@ export type PropertyType = {
 };
 const PropertyList = () => {
   const [properties, setProperties] = useState<PropertyType[]>([]);
-  //
+
   const getProperties = async () => {
     const url = "/api/properties/";
     const tmpProperty = await apiService.get(url);
 
     setProperties(tmpProperty.data);
   };
-  //
+
   useEffect(() => {
     getProperties();
   }, []);
-  //
+
   return (
     <>
       {properties.map((property) => {

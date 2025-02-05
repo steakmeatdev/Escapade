@@ -1,15 +1,18 @@
 import Image from "next/image";
-import { PropertyType } from "./PropertyList"; // Ensure this path is correct
+import { PropertyType } from "./PropertyList";
+import { useRouter } from "next/navigation";
 
-// Define the props interface outside the component
 interface PropertyProps {
   property: PropertyType;
 }
 
-// The component should return JSX and be properly exported
 const PropertyListItem: React.FC<PropertyProps> = ({ property }) => {
+  const router = useRouter();
   return (
-    <div className="cursor-pointer">
+    <div
+      className="cursor-pointer"
+      onClick={() => router.push(`/properties/${property.id}`)}
+    >
       <div className="relative overflow-hidden aspect-square rounded-xl">
         <Image
           fill
