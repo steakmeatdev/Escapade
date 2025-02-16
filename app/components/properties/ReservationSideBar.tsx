@@ -7,7 +7,6 @@ import DatePicker from "../forms/Calendar";
 import apiService from "@/app/services/apiService";
 import useLoginModal from "@/app/hooks/useLoginModal";
 
-// Initila date range with today
 const initialDateRange = {
   startDate: new Date(),
   endDate: new Date(),
@@ -38,15 +37,13 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
   const [minDate, setMinDate] = useState<Date>(new Date());
   const [bookedDates, setBookedDates] = useState<Date[]>([]);
   const [guests, setGuests] = useState<string>("1");
+
   const guestsRange = Array.from(
     { length: property.guests },
     (_, index) => index + 1
   );
 
-  // Booking function
   const performBooking = async () => {
-    console.log("performBooking", userId);
-
     if (userId) {
       if (dateRange.startDate && dateRange.endDate) {
         const formData = new FormData();
@@ -58,20 +55,14 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
         formData.append("end_date", format(dateRange.endDate, "yyyy-MM-dd"));
         formData.append("number_of_nights", nights.toString());
         formData.append("total_price", totalPrice.toString());
-        console.log(guests);
-        console.log(dateRange.startDate);
-        console.log(dateRange.endDate);
-        console.log(nights);
-        console.log(totalPrice);
-        console.log();
-        console.log(formData);
+
         const response = await apiService.post(
           `/api/properties/${property.id}/book/`,
           formData
         );
 
         if (response.success) {
-          console.log("Bookin successful");
+          console.log("Booking successful");
         } else {
           console.log("Something went wrong...");
         }
@@ -81,12 +72,10 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
     }
   };
 
-  // Setting date range Selection is the value from the calendar
   const _setDateRange = (selection: any) => {
     const newStartDate = new Date(selection.startDate);
     const newEndDate = new Date(selection.endDate);
 
-    // case the startdate and enddate are thes sam, we add a day to enddate
     if (newEndDate <= newStartDate) {
       newEndDate.setDate(newStartDate.getDate() + 1);
     }
@@ -98,13 +87,12 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
     });
   };
 
+  // Getting the ranges of the dates of the reservations to disable them from the selection calendar
   const getReservations = async () => {
     const reservations = await apiService.get(
       `/api/properties/${property.id}/reservations/`
     );
-
     let dates: Date[] = [];
-
     reservations.forEach((reservation: any) => {
       const range = eachDayOfInterval({
         start: new Date(reservation.start_date),
@@ -113,29 +101,20 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
 
       dates = [...dates, ...range];
     });
-
     setBookedDates(dates);
   };
 
   useEffect(() => {
     getReservations();
-    // This just calculates the dateRange using differnceInDays, then calculates the fee (5%) then the total price
-    // Counting the days
     if (dateRange.startDate && dateRange.endDate) {
       const dayCount = differenceInDays(dateRange.endDate, dateRange.startDate);
-
-      // calculating the fee
       if (dayCount && property.price_per_night) {
         const _fee = ((dayCount * property.price_per_night) / 100) * 5;
-        // Setting the dee
         setFee(_fee);
         setTotalPrice(dayCount * property.price_per_night + _fee);
         setNights(dayCount);
-
-        // If dateRange == 0
       } else {
         const _fee = (property.price_per_night / 100) * 5;
-
         setFee(_fee);
         setTotalPrice(property.price_per_night + _fee);
         setNights(1);
@@ -185,7 +164,7 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
       </div>
 
       <div className="mb-4 flex justify-between align-center">
-        <p>Djangobnb fee</p>
+        <p>Escapade Fee amount</p>
 
         <p>${fee}</p>
       </div>

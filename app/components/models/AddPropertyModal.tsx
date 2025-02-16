@@ -13,8 +13,9 @@ import { useRouter } from "next/navigation";
 
 const AddPropertyModal = () => {
   const router = useRouter();
-  // Specifying form states
+  // Steps for the pages shit later
   const [currentStep, setCurrentStep] = useState(1);
+
   const [errors, setErrors] = useState<string[]>([]);
   const [dataCategory, setDataCategory] = useState("");
   const [dataTitle, setDataTitle] = useState("");
@@ -25,18 +26,14 @@ const AddPropertyModal = () => {
   const [dataGuests, setDataGuests] = useState("");
   const [dataCountry, setDataCountry] = useState<SelectCountryValue>();
 
-  // dataImage has file type
   const [dataImage, setDataImage] = useState<File | null>(null);
 
-  // Including useAddPropertyModal
   const addPropertyModal = useAddPropertyModal();
 
-  // Function to set category state
   const setCategory = (category: string) => {
     setDataCategory(category);
   };
 
-  // Function to set image state (file 0)
   const setImage = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       const tmpImage = event.target.files[0];
@@ -44,11 +41,7 @@ const AddPropertyModal = () => {
     }
   };
 
-  // Function to submit the form and creating a property in the database
   const submitForm = async () => {
-    console.log("submitForm");
-
-    // Checking if states are not empty
     if (
       dataCategory &&
       dataTitle &&
@@ -57,7 +50,7 @@ const AddPropertyModal = () => {
       dataCountry &&
       dataImage
     ) {
-      // Creating the form
+      // Must use a fucking formData to include the image
       const formData = new FormData();
       formData.append("category", dataCategory);
       formData.append("title", dataTitle);
@@ -70,18 +63,15 @@ const AddPropertyModal = () => {
       formData.append("country_code", dataCountry.value);
       formData.append("image", dataImage);
 
-      // Calling service API to submit the form
       const response = await apiService.post(
         "/api/properties/create/",
         formData
       );
 
       if (response.success) {
-        console.log("SUCCESS :-D");
         router.push("/");
         addPropertyModal.close();
       } else {
-        console.log("Error");
         const tmpErrors: string[] = Object.values(response).map(
           (error: any) => {
             return error;
@@ -91,8 +81,6 @@ const AddPropertyModal = () => {
       }
     }
   };
-  //
-  //
   const content = (
     <>
       {currentStep == 1 ? (
@@ -106,12 +94,13 @@ const AddPropertyModal = () => {
         </>
       ) : currentStep == 2 ? (
         <>
-          <h2 className="mb-6 text-2xl">Describe your place</h2>
+          <h2 className="mb-6 text-2xl">Describe your house</h2>
           <div className="pt-3 pb-6 space-y-4">
             <div className="flex flex-col space-y-2">
               <label>Title</label>
               <input
                 type="text"
+                // I have no fucking idea why this input field must be controlled
                 value={dataTitle}
                 onChange={(e) => setDataTitle(e.target.value)}
                 className="w-full p-4 border border-gray-600 rounded-xl"
@@ -186,7 +175,7 @@ const AddPropertyModal = () => {
           <h2 className="mb-6 text-2xl">Location</h2>
           <div className="pt-3 pb-6 space-y-4">
             <SelectCountry
-              value={dataCountry}
+              country={dataCountry}
               onChange={(value) => setDataCountry(value as SelectCountryValue)}
             />
           </div>
@@ -204,6 +193,8 @@ const AddPropertyModal = () => {
             <div className="py-4 px-6 bg-gray-600 text-white rounded-xl">
               <input type="file" accept="image/*" onChange={setImage} />
             </div>
+
+            {/* Must be sure user uploaded a fucking image then display it*/}
             {dataImage && (
               <div className="w-[200px] h-[150px] relative">
                 <Image
@@ -219,7 +210,7 @@ const AddPropertyModal = () => {
             return (
               <div
                 key={index}
-                className="p-5 mb-4 bg-airbnb text-white rounded-xl opacity-80"
+                className="p-5 mb-4 bg-escapade text-white rounded-xl opacity-80"
               >
                 {error}
               </div>

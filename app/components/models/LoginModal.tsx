@@ -52,6 +52,7 @@ const LoginModel = () => {
           type="password"
           className="w-full h-[54px] px-4 border border-gray-300 rounded-xl"
         />
+        {/* Here showing errors in case of a dumb user */}
 
         {errors.map((error, index) => {
           return (
@@ -63,6 +64,7 @@ const LoginModel = () => {
             </div>
           );
         })}
+
         <CustomButton onClick={submitLogin} label="submit" className="" />
       </form>
     </>
